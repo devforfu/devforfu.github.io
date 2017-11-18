@@ -1,0 +1,27 @@
+---
+layout: page
+category: blog
+---
+{% for post in site.posts %}
+<div class="card post" href="{{ post.url }}">
+    <div class="card-block">
+        <div class="row">
+            <div class="col-3">
+                <img class="img-fluid" width=250 src="assets/img/{{ post.image }}">
+            </div>
+            <div class="col-9">
+                <h4 class="header">{{ post.title }}</h4>
+                <hr/>
+                <article class="text main">
+                    {{ post.excerpt }}
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="timestamp">
+            Publication Date: {{ post.date | date_to_long_string }}
+        </div>
+    </div>
+</div>
+{% endfor %}
