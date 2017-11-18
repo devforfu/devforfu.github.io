@@ -1,5 +1,5 @@
 function setup() {
-    let posts = Array.from(document.getElementsByClassName('post'));
+    let posts = Array.from(document.getElementsByClassName('post-link'));
     posts.forEach((post) => {
         post.addEventListener('click', (e) => {
             let location = window.location;
