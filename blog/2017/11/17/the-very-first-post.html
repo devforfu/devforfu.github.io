@@ -22,20 +22,21 @@
             <div class="subtitle">{Software Developer & AI Enthusiast}</div>
         </div>
     </div>
-    <div class="nav">
+    <div class="nav" id="nav-site-pages">
         <ul>
-            <li class="about"><a href="/">About</a></li>
-            <li class="home"><a href="/">Home</a></li>
-            <li class="blog"><a class="active" href="#">Blog</a></li>
+            <li class="blog"><a href="/" class="active">Blog</a></li>
             <li class="projects"><a href="#">Projects</a></li>
             <li class="resume"><a href="#">Resume</a></li>
-            <li class="contact"><a href="#">Contact</a></li>
+            <li class="index"><a href="#">Index</a></li>
+            <li class="contact"><a href="/contact">Contact</a></li>
         </ul>
     </div>
-    <div class="container">
-        <div class="container post">
+    <div class="container post">
     <h3 class="header centered">Deep Learning Machine Software: Ubuntu, CUDA, and TensorFlow</h3>
-    <hr/>
+    <hr />
+    <div class="tags right">
+        <span>tags:</span>&nbsp;tensorflow, ubuntu, deployment
+    </div>
     <article class="text main">
     <p>Recently I’ve decided to build a simple deep learning machine with single
 <strong>GTX 1080Ti GPU</strong> and based on <strong>Ubuntu 16.04</strong>. The machine’s assembling process
@@ -50,7 +51,8 @@ of performed actions in case if the setup system would ever require re-deploymen
     <ul></ul>
 </div>
 
-<hr />
+<hr class="with-margin" />
+
 <h4 class="header" id="video-driver">Optional Step: Prepare Bootable USB and Install OS</h4>
 
 <p>Of course, the first step in deploying deep learning machine based on Ubuntu OS,
@@ -62,7 +64,8 @@ and is not mentioned here.</p>
 host machine works under macOS, <a href="https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-macos#0">the following tutorial</a>
 describes how to create bootable stick.</p>
 
-<hr />
+<hr class="with-margin" />
+
 <h4 class="header" id="disable-ui">Disabling Graphical Interface and CLI Mode Preparations</h4>
 
 <p>If desktop version of Ubuntu was installed, then by default the user will be
@@ -122,7 +125,8 @@ used when desktop UI was enabled):</p>
 <span class="nv">$ </span>reboot
 </code></pre></div></div>
 
-<hr />
+<hr class="with-margin" />
+
 <h4 class="header" id="generate-ssh">Generate SSH Key and Upload to the Host</h4>
 
 <p>When you connect to your deep learning machine via SSH, each time you need to
@@ -143,7 +147,8 @@ following script with actual values):</p>
 like <code class="highlighter-rouge">ssh username@$192.186.0.10</code> without entering credentials or providing
 path to the key.</p>
 
-<hr />
+<hr class="with-margin" />
+
 <h4 class="header" id="anaconda">Installing Anaconda</h4>
 
 <p>When everything is prepared, we’re going to install <a href="https://www.anaconda.com/distribution/">Anancoda</a> Python’s distribution. It is not required to use <strong>Anaconda</strong> to install TensorFlow or
@@ -163,7 +168,8 @@ Type <span class="s2">"help"</span>, <span class="s2">"copyright"</span>, <span 
 <span class="o">&gt;&gt;&gt;</span>
 </code></pre></div></div>
 
-<hr />
+<hr class="with-margin" />
+
 <h4 class="header" id="tf-and-cuda">Installing CUDA (+cuDNN) Drivers and TensorFlow</h4>
 
 <p>To run TensorFlow on GPU, CUDA driver and cuDNN libraries should be installed. All required
@@ -234,7 +240,8 @@ print(output)
 <p>If you don’t suppress TF debugging info output, you’ll see a notification about
  available GPU/GPUs and memory after library’s import.</p>
 
-<hr />
+<hr class="with-margin" />
+
 <h3 id="references">References</h3>
 
 <ol>
@@ -264,12 +271,11 @@ print(output)
     </li>
 </ol>
 
-    </article>    
+    </article>
 </div>
-
-    </div>
+    
     <footer class="footer">
-        Each page has this footer, and it is 18 Nov 2017 today
+        Ilia Zaitsev, 2017
     </footer>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
             integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"

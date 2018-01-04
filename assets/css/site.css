@@ -83,10 +83,18 @@ body {
     color: whitesmoke;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav a.active {
     background: darkorange;
     color: ghostwhite;
 }
+
+
+/*.nav li:hover,
+.nav li.active {
+    background: darkorange;
+    color: ghostwhite;
+}*/
 
 .nav a, .nav a:hover {
     text-decoration: none;
@@ -133,13 +141,15 @@ body {
 
 .post .text {
     font-family: "Roboto", monospace;
+    text-align: justify;
 }
 
 .post .text.digest {
     color: dimgray;
 }
 
-.post .header.centered {
+.post .header.centered,
+.post .tags.centered {
     text-align: center;
 }
 
@@ -148,9 +158,24 @@ body {
 }
 
 hr {
+    margin-top: 0;
+}
+
+hr.with-margin {
     margin-top: 2em;
 }
 
+.post .tags {
+    text-align: right;
+    font-family: "Space Mono", monospace;
+    font-size: 0.9em;
+    margin-bottom: 1em;
+}
+
+.post .tags span {
+    color: royalblue;
+    font-weight: bold;
+}
 
 /* --------- */
 /* Container */
@@ -158,6 +183,24 @@ hr {
 
 .container {
     margin-top: 2em;
+}
+
+
+/* --------------- */
+/* Contact buttons */
+/* --------------- */
+
+.link-container {
+    text-align: center;
+}
+
+.link-container ul {
+    list-style: none;
+}
+
+.link-container li img {
+    height: 90px;
+    padding-bottom: 1em;
 }
 
 

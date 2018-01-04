@@ -1,6 +1,6 @@
 function setup() {
-    let posts = Array.from(document.getElementsByClassName('post-link'));
-    posts.forEach((post) => {
+    const posts = Array.from(document.getElementsByClassName('post-link'));
+    posts.forEach(post => {
         post.addEventListener('click', (e) => {
             let location = window.location;
             let postUrl = post.getAttribute('href');
@@ -8,6 +8,20 @@ function setup() {
             window.location = newLocation;
         });
     });
+
+    const nav = document.getElementById('nav-site-pages');
+    const anchors = nav.getElementsByTagName('a');
+    const [_, current] = window.location.pathname.split('/');
+    const domain = window.location.origin;
+    for (const anchor of anchors) {
+        const relative = anchor.href.substring(domain.length + 1);
+        if (relative === current) {
+            anchor.classList.add('active');
+        } else {
+            anchor.classList.remove('active');
+        }
+    }
+
     if (document.querySelector('.list-of-contents') !== null) {
         createContentsList();
     }
