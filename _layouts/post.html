@@ -3,8 +3,11 @@ layout: page
 ---
 <div class="container post">
     <h3 class="header centered">{{ page.title }}</h3>
-    <hr/>
+    <hr />
+    <div class="tags right">
+        <span>tags:</span>&nbsp;{{ page.tags | join: ', ' }}
+    </div>
     <article class="text main">
     {{ content }}
-    </article>    
+    </article>
 </div>

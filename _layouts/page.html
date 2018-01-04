@@ -24,21 +24,18 @@
             <div class="subtitle">{Software Developer & AI Enthusiast}</div>
         </div>
     </div>
-    <div class="nav">
+    <div class="nav" id="nav-site-pages">
         <ul>
-            <li class="about"><a href="/">About</a></li>
-            <li class="home"><a href="/">Home</a></li>
-            <li class="blog"><a class="active" href="#">Blog</a></li>
+            <li class="blog"><a href="/" class="active">Blog</a></li>
             <li class="projects"><a href="#">Projects</a></li>
             <li class="resume"><a href="#">Resume</a></li>
-            <li class="contact"><a href="#">Contact</a></li>
+            <li class="index"><a href="#">Index</a></li>
+            <li class="contact"><a href="/contact">Contact</a></li>
         </ul>
     </div>
-    <div class="container">
-        {{ content }}
-    </div>
+    {{ content }}    
     <footer class="footer">
-        Each page has this footer, and it is {{ site.time | date_to_string }} today
+        Ilia Zaitsev, 2017
     </footer>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
             integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"

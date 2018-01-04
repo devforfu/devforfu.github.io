@@ -3,6 +3,7 @@ layout: post
 category: blog
 permalink: /:categories/:year/:month/:day/:title
 title: "Deep Learning Machine Software: Ubuntu, CUDA, and TensorFlow"
+tags: ['tensorflow', 'ubuntu', 'deployment']
 image: "tf.png"
 ---
 
@@ -19,7 +20,7 @@ of performed actions in case if the setup system would ever require re-deploymen
     <ul></ul>
 </div>
 
----
+<hr class="with-margin">
 <h4 class="header" id="video-driver">Optional Step: Prepare Bootable USB and Install OS</h4>
 
 Of course, the first step in deploying deep learning machine based on Ubuntu OS,
@@ -31,7 +32,7 @@ Briefly, you just need download ISO image and "burn" it onto flash drive. If you
 host machine works under macOS, [the following tutorial](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-macos#0)
 describes how to create bootable stick.
 
----
+<hr class="with-margin">
 <h4 class="header" id="disable-ui">Disabling Graphical Interface and CLI Mode Preparations</h4>
 
 If desktop version of Ubuntu was installed, then by default the user will be
@@ -95,7 +96,7 @@ $ sudo systemctl disable lightdm
 $ reboot
 ```
 
----
+<hr class="with-margin">
 <h4 class="header" id="generate-ssh">Generate SSH Key and Upload to the Host</h4>
 
 When you connect to your deep learning machine via SSH, each time you need to
@@ -117,7 +118,7 @@ Now you're able to connect to your host just typing something
 like `ssh username@$192.186.0.10` without entering credentials or providing
 path to the key.
 
----
+<hr class="with-margin">
 <h4 class="header" id="anaconda">Installing Anaconda</h4>
 
 When everything is prepared, we're going to install [Anancoda](https://www.anaconda.com/distribution/) Python's distribution. It is not required to use **Anaconda** to install TensorFlow or
@@ -138,7 +139,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
----
+<hr class="with-margin">
 <h4 class="header" id="tf-and-cuda">Installing CUDA (+cuDNN) Drivers and TensorFlow</h4>
 
 To run TensorFlow on GPU, CUDA driver and cuDNN libraries should be installed. All required
@@ -215,7 +216,7 @@ print(output)
 If you don't suppress TF debugging info output, you'll see a notification about
  available GPU/GPUs and memory after library's import.
 
----
+<hr class="with-margin">
 ### References
 
 <ol>

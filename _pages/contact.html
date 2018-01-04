@@ -1,0 +1,36 @@
+---
+layout: page
+permalink: /contact/
+links:
+    - picture: 'github.png'
+      url: 'https://github.com/devforfu'
+    - picture: 'so.png'
+      url: 'https://stackoverflow.com/users/6619344/devforfu'
+    - picture: 'upwork.png'
+      url: 'https://www.upwork.com/freelancers/~01d11961a8111e5d25'
+---
+
+<!-- <ul class="list-unstyled">
+    {% for link in page.links %}
+    <li class="link-button">
+        <a href="{{ link.url }}">
+            <img src="{{ site.baseurl }}/assets/img/{{ link.picture }}"
+                 class="image"
+                 height="70">
+        </a>
+    </li>
+    {% endfor %}
+</ul> -->
+
+<div class="container link-container">
+    <ul>
+    {% for link in page.links %}
+        <li>
+            <a href="{{ link.url }}">
+                <img src="{{ site.baseurl}}/assets/img/{{ link.picture }}"
+                     class="link-button">
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
