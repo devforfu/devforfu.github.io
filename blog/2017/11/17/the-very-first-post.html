@@ -271,11 +271,30 @@ print(output)
     </li>
 </ol>
 
+<hr class="with-margin" />
+
+
     </article>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "/blog/2017/11/17/the-very-first-post";
+        this.page.identifier = "0";
+        this.page.title = "Deep Learning Machine Software: Ubuntu, CUDA, and TensorFlow";
+      };
+
+      (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//iliazaitsev-me.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-    
+
     <footer class="footer">
-        Ilia Zaitsev, 2017
+        Ilia Zaitsev, 2017-2018
     </footer>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
             integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
@@ -291,6 +310,6 @@ print(output)
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/lib/site.js"></script>
+    <script src="/lib/site.js"></script>    
 </body>
 </html>
