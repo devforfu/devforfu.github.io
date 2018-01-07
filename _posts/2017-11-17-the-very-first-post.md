@@ -4,6 +4,7 @@ category: blog
 permalink: /:categories/:year/:month/:day/:title
 title: "Deep Learning Machine Software: Ubuntu, CUDA, and TensorFlow"
 tags: ['tensorflow', 'ubuntu', 'deployment']
+identifier: 0
 image: "tf.png"
 ---
 
@@ -245,3 +246,5 @@ If you don't suppress TF debugging info output, you'll see a notification about
             NVIDIA Deep Learning Portal</a>
     </li>
 </ol>
+
+<hr class="with-margin">
