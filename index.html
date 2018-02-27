@@ -10,12 +10,14 @@
           href="https://fonts.googleapis.com/css?family=Coda:400,800|Roboto:400,500,700|Share:400,400i,700,700i|Space+Mono:400,400i,700,700i">
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/hybrid.min.css">
-    <link rel="stylesheet" href="https://iliazaitsev.me/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/gist.css">
+    <link rel="stylesheet" href="/assets/css/hsjs.css">
 </head>
 <body onload="setup();">
     <div class="topmost">
         <div class="image">
-            <img src="https://iliazaitsev.me/assets/img/writings.png" width="1250">
+            <img src="/assets/img/writings.png" width="1250">
         </div>
         <div class="text">
             <div class="title">Ilia Zaitsev</div>
@@ -32,6 +34,35 @@
         </ul>
     </div>
     <div class="container">
+
+<div class="card post post-link" href="/blog/2018/02/14/python-new">
+    <div class="card-block">
+        <div class="row">
+            <div class="col-3">
+                <img class="img-fluid" width=250 src="assets/img/new.png">
+            </div>
+            <div class="col-9">
+                <h4 class="header">Using Python __new__ Method to Dynamically Switch Class Implementations</h4>
+                <hr/>
+                <article class="text main">
+                    <p>Each Python object has a set magic of methods which could be overridden to
+customize instance creation and behavior. One of widely used methods is
+<code class="highlighter-rouge">__init__</code>, which is used to perform newly created instance initialization.
+But there is one more magic method taking part in object creation, called <code class="highlighter-rouge">__new__</code>,
+which is actually <em>creates</em> class’s instance. The post explains how to use
+this method to dynamically switch implementation of class methods.</p>
+
+
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="timestamp">
+            Publication Date: 14 February 2018
+        </div>
+    </div>
+</div>
 
 <div class="card post post-link" href="/blog/2017/11/17/the-very-first-post">
     <div class="card-block">
@@ -79,7 +110,10 @@ of performed actions in case if the setup system would ever require re-deploymen
             crossorigin="anonymous">
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://iliazaitsev.me/lib/site.js"></script>    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/swift.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="/lib/site.js"></script>
 </body>
 </html>

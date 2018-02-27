@@ -121,6 +121,14 @@ body {
 /* Posts and Cards */
 /* --------------- */
 
+.post {
+    margin-bottom: 2em;
+}
+
+.post:last-child {
+    margin-bottom: 0;
+}
+
 .card.post {
     cursor: pointer;
 }
