@@ -13,6 +13,8 @@
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/hybrid.min.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/site.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/gist.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/hsjs.css">
 </head>
 <body onload="setup();">
     <div class="topmost">
@@ -50,7 +52,10 @@
             crossorigin="anonymous">
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="{{ site.baseurl }}/lib/site.js"></script>    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/swift.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="{{ site.baseurl }}/lib/site.js"></script>
 </body>
 </html>
