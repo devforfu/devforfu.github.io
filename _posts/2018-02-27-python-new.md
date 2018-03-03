@@ -158,7 +158,7 @@ and specific initializers.
 
 
 <hr class="with-margin">
-<h4 class="header" id="pandas">Dictionary Lookup of Registered Classes</h4>
+<h4 class="header" id="notifications">Dictionary Lookup of Registered Classes</h4>
 
 <blockquote class="tip">
 <strong>TL;DR</strong>: Again,
@@ -275,7 +275,7 @@ class ExcelWriter(meta=abc.ABCMeta):
 ```
 
 <hr class="with-margin">
-<h4 class="header" id="wrapup">Conclusion</h4>
+<h4 class="header" id="conclusion">Conclusion</h4>
 
 A dynamic nature of Python's type system allows not only to override methods
 and bind new attributes to object, but also to completely substitute appropriate
