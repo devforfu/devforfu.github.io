@@ -4,8 +4,8 @@ category: blog
 permalink: /:categories/:year/:month/:day/:title
 title: "Deep Learning Machine Software: Ubuntu, CUDA, and TensorFlow"
 tags: ['tensorflow', 'ubuntu', 'deployment']
-identifier: 0
 image: "tf.png"
+identifier: 0
 ---
 
 Recently I've decided to build a simple deep learning machine with single

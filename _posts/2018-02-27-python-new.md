@@ -3,8 +3,9 @@ layout: post
 category: blog
 permalink: /:categories/:year/:month/:day/:title
 title: "Using Python __new__ Method to Dynamically Switch Class Implementations"
-image: "new.png"
 tags: ['python', 'inheritance', 'magic', 'metaclass']
+image: "new.png"
+identifier: 1
 ---
 
 Each Python object has a set magic of methods which could be overridden to
@@ -185,7 +186,7 @@ class NotificationsDispatcher(metaclass=abc.ABCMeta):
     purposes and local runs it supports reading messages from local source.
     """
 
-    def __new__(cls, user_id: int, method: str= 'http', **kwargs):
+    def __new__(cls, user_id: int, method: str='http', **kwargs):      
         if issubclass(cls, NotificationsDispatcher):
             cls = get_dispatcher(method)
         return object.__new__(cls)
@@ -195,10 +196,8 @@ class NotificationsDispatcher(metaclass=abc.ABCMeta):
         self.dateformat = dateformat
 
     @abc.abstractmethod
-    def get_notifications(self) -> dict:
-        """
-        Returns a list of pending notification messages.
-        """
+    def get_notifications(self):
+        pass
 ```
 
 See that this time, as it was already noted, instead of exhaustive
