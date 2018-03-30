@@ -243,3 +243,12 @@ blockquote.tip {
     background: ghostwhite;
     border-color: dodgerblue;
 }
+
+/* ------ */
+/* Images */
+/* ------ */
+
+.center-image {
+    margin: 0 auto;
+    display: block;
+}
