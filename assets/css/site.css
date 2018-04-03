@@ -252,3 +252,13 @@ blockquote.tip {
     margin: 0 auto;
     display: block;
 }
+
+/* ----- */
+/* Other */
+/* ----- */
+
+p.huge {
+  font-family: "Share";
+  font-weight: normal;
+  font-size: 1.5em;
+}
