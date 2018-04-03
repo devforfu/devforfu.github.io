@@ -10,27 +10,41 @@ links:
       url: 'https://www.upwork.com/freelancers/~01d11961a8111e5d25'
 ---
 
-<!-- <ul class="list-unstyled">
+<!-- <div class="container">
+  <p class="text-center huge">Interested in my software development activity?</p>
+  <p class="text-center huge">Then you can reach me out using one of the links below:</p>
+  <div class="row">
     {% for link in page.links %}
-    <li class="link-button">
-        <a href="{{ link.url }}">
-            <img src="{{ site.baseurl }}/assets/img/{{ link.picture }}"
-                 class="image"
-                 height="70">
-        </a>
-    </li>
+    <div class="col-4 d-flex justify-content-center">
+      <a href="{{ link.url }}">
+        <img src="{{ site.baseurl }}/assets/img/{{ link.picture }}"
+             class="image" height="70">
+      </a>
+    </div>
     {% endfor %}
-</ul> -->
+  </div>
+</div> -->
 
-<div class="container link-container">
-    <ul>
-    {% for link in page.links %}
-        <li>
-            <a href="{{ link.url }}">
-                <img src="{{ site.baseurl}}/assets/img/{{ link.picture }}"
-                     class="link-button">
-            </a>
-        </li>
-    {% endfor %}
-    </ul>
+<div class="container">
+  <div class="row h-75">
+      <div class="col-12 h-100 d-table">
+          <div class="d-table-cell align-middle">
+            <p class="text-center huge">Want to know more?</p>
+            <p class="text-center huge">
+              Then click one of the buttons below!
+            </p>
+            <ul class="list-inline text-center">
+            {% for link in page.links %}
+            <li class="list-inline-item">
+              <a href="{{ link.url }}" class="d-flex justify-content-center">
+                <img src="{{ site.baseurl }}/assets/img/{{ link.picture }}"
+                     class="image"
+                     height="70">
+              </a>
+            </li>
+            {% endfor %}
+            </ul>
+          </div>
+      </div>
+  </div>
 </div>
