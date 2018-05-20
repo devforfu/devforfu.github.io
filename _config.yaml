@@ -1,3 +1,4 @@
-baseurl: 'https://iliazaitsev.me'
+# baseurl: 'https://iliazaitsev.me'
+baseurl: ''
 include: ['_pages']
 excerpt_separator: <!--more-->
