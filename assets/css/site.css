@@ -219,7 +219,7 @@ hr.with-margin {
 blockquote {
   border-width: 1px 1px 1px 10px;
   border-style: solid;
-  padding: 0.5em 10px;
+  padding: 0.5em 0.5em;
 }
 
 blockquote:before {
@@ -244,6 +244,17 @@ blockquote.tip {
     border-color: dodgerblue;
 }
 
+blockquote.algo {
+  background: white;
+  padding-top: 1em;
+  padding-bottom: 0;
+  padding-right: 2em;
+}
+
+blockquote.algo li:not(:last-child) {
+  padding-bottom: 0.5em;
+}
+
 /* ------ */
 /* Images */
 /* ------ */
@@ -261,4 +272,10 @@ p.huge {
   font-family: "Share";
   font-weight: normal;
   font-size: 1.5em;
+}
+
+em.figure {
+  padding-top: 1em;
+  display: block;
+  text-align: center;
 }

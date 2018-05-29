@@ -1,0 +1,271 @@
+<html>
+<head>
+    <title>Ilia Zaitsev's personal site</title>
+    <meta charset="utf-8"></meta>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Coda:400,800|Roboto:400,500,700|Share:400,400i,700,700i|Space+Mono:400,400i,700,700i">
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/hybrid.min.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/gist.css">
+    <link rel="stylesheet" href="/assets/css/hsjs.css">
+</head>
+<body onload="setup();">
+    <div class="topmost">
+        <div class="image">
+            <img src="/assets/img/writings.png" width="1250">
+        </div>
+        <div class="text">
+            <div class="title">Ilia Zaitsev</div>
+            <div class="subtitle">{Software Developer & AI Enthusiast}</div>
+        </div>
+    </div>
+    <div class="nav" id="nav-site-pages">
+        <ul>
+            <li class="blog"><a href="/" class="active">Blog</a></li>
+            <li class="projects"><a href="#">Projects</a></li>
+            <li class="resume"><a href="#">Resume</a></li>
+            <li class="index"><a href="#">Index</a></li>
+            <li class="contact"><a href="/contact">Contact</a></li>
+        </ul>
+    </div>
+    <div class="container post">
+    <h3 class="header centered">Using K-Means clustering to Quantize Dataset Samples (Part 1)</h3>
+    <hr />
+    <div class="tags right">
+        <span>tags:</span>&nbsp;python, kmeans, numpy, sklearn
+    </div>
+    <article class="text main">
+    <p>Clustering algorithms are used to analyze data in unsupervised fashion, in
+cases when labels are not available or to get new insights about dataset
+distribution. K-Means is one of the oldest clustering algorithms developed
+several decades ago, but still used in Machine Learning tasks. One of the ways
+to use this algorithm is to apply it for <em>vector quantization</em>, a process which
+maps vectors of arbitrary length. In this post I am going to show simple
+implementation of K-Means and apply it to
+<a href="https://archive.ics.uci.edu/ml/datasets/Dataset+for+ADL+Recognition+with+Wrist-worn+Accelerometer">Wrist-worn Accelerometer Data Set</a></p>
+
+<!--more-->
+
+<blockquote class="tip">
+<strong>TL;DR:</strong> Everyone who doesn't need verbose explanations and
+prefer to read code instead could use the following link to navigate right into
+the repository with vectors quantization implementation.
+</blockquote>
+
+<div class="list-of-contents">
+  <h4>Post contents</h4>
+  <ul></ul>
+</div>
+
+<hr class="with-margin" />
+
+<h4 class="header" id="intro">K-Means Algorithm</h4>
+
+<p>K-means clustering is a simple and elegant approach for partitioning a dataset
+into <strong>K</strong> distinct, non-overlapping clusters. The algorithm implementation
+could be represented using the following pseudocode:</p>
+
+<blockquote class="algo">
+  <ol>    
+    <li>
+      Assign random labels from range `1...K` to each observation in
+      dataset to get an initial partitioning.
+    </li>
+    <li>
+      For each of `K` clusters, compute the cluster <em>centroid</em> which is
+      the vector of <em>p</em> feature means for the observations in the
+      <strong>k-th</strong> cluster. (In other words, each cluster's centroid is
+      an average of vectors assigned to the cluster).
+    </li>
+    <li>
+      Assign each observation to the cluster whose centroid is closest in
+      terms of <em>Euclidian distance</em> metric.
+    </li>
+    <li>If clusters assignment was changed, go to <strong>step 2</strong></li>
+    <li>Return calculated cluster centroids and assigned labels.</li>
+  </ol>
+</blockquote>
+
+<p>Note that the algorithm uses Euclidean metric to measure similarity between
+data points. It means that each dimension is considered to be <strong>equally important</strong>
+to differentiate one sample from another. Therefore, it is crucial to normalize
+your dataset before running the algorithm.</p>
+
+<p><strong>Figure 1</strong> shows an animated process of K-Means clustering of randomly
+generated dataset, where each cluster is rendered with a different color.
+While the algorithm iterates though its loop, centroids slowly change their
+positions until there is no re-assignments anymore.</p>
+
+<p><img src="/assets/img/clustering.gif" alt="Clustering" class="center-image" />
+<em class="figure">Fig 1. K-Means clustering of dummy dataset with K=5</em></p>
+
+<p>Due to the random generation of initial centroids, it is a good idea to
+run the algorithm several times and choose the best clusters assignment. Which
+assignment is the best? For this purpose one could use an <strong>inertia metric</strong>,
+which is the total distance from samples to their clusters’s centroids:</p>
+
+<script type="math/tex; mode=display">I = \sum_{j = 1}^{K}{ \sum_{\substack{i = 1 \\ x_i \in C_j}}^{N}{ d(x_i, c_j)} }</script>
+
+<p>Where <script type="math/tex">K</script> is number of clusters, <script type="math/tex">N</script> — number of observations,
+<script type="math/tex">C_j</script> is set of observations belonging to cluster <script type="math/tex">j</script> and <script type="math/tex">c_j</script> is centroid
+of <script type="math/tex">j</script>-th cluster. This measure of clustering quality which shows how close
+dataset observations are to the centers of their clusters.</p>
+
+<p>In next section we’re going to implement K-Means clustering using <code class="highlighter-rouge">numpy</code> library.</p>
+
+<hr class="with-margin" />
+
+<h4 class="header" id="implementation">Implementation with NumPy</h4>
+
+<p>The full source code with K-Means clustering implementation could be found
+via <a href="https://github.com/devforfu/Blog/blob/master/kmeans/kmeans.py">this link</a>.
+In this section let’s highlight the main keypoints of the algorithm.</p>
+
+<p>To implement the main loop of K-Means clustering we need a function, that accepts
+a dataset, number of clusters <script type="math/tex">K</script>, and a couple of additional
+parameters to specify how many restarts of algorithm do we want to perform to
+find the best clustering assignment:</p>
+
+<script src="https://gist.github.com/devforfu/43e1a43054bd22081b71083d66ca0464.js"></script>
+
+<p>A dataset normalization required only to subtract the mean of dataset values
+from each of samples and divide them by standard deviation. To generate random
+centroids we can use one of random generators from <code class="highlighter-rouge">numpy.random</code> module.
+Calculating an inertia metric is also quite simple using <code class="highlighter-rouge">numpy</code> and its
+filtering and linear algebra functions:</p>
+
+<script src="https://gist.github.com/devforfu/37642a7caddc5f38fba331895d6356e7.js"></script>
+
+<p>Before proceeding to quantization algorithm, here is an important remark. Despite
+of the fact that the implementation of K-Means algorithm provided in this post’s
+repository is totally functional and does its job, it is quite far away from
+production-ready code.</p>
+
+<p>Check <a href="https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/cluster/k_means_.py">this link</a>
+from scikit-learn library showing handling various edge cases and making code
+much faster than naïve implementation, including <a href="https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/cluster/_k_means.pyx">fragments</a>
+written in <a href="http://cython.org/">Cython</a> for higher performance.</p>
+
+<hr class="with-margin" />
+
+<h4 class="header" id="quantization">Vectors Quantization</h4>
+
+<p>Before being used in data mining for cluster analysis, the algorithm was originally
+used in the field of signal processing as a method of <strong>vectors quantization</strong> (VQ).
+VQ is a data reduction method which means that it seeks to reduce the number
+of dimensions in the input data so that the models used to match unknowns can
+be as simple as possible.</p>
+
+<p>Quantization allows to transform continuous values into discrete buckets. <strong>Figure 2</strong>
+shows a 2D plane filled with <strong>blue</strong> dots representing values of random continuous
+real vectors. To discretize this space into finite number of buckets one could
+plot a grid on top of plane with blue dots and replace each blue dot with a <strong>red</strong>
+one which is the center of a grid cell where the blue dot falls.</p>
+
+<p><img src="/assets/img/dots.png" alt="Quantization" class="center-image" />
+<em class="figure">Fig 2. Continuous 2D points discretized into buckets</em></p>
+
+<p>The K-Means algorithm allows us to do exactly this. Each centroid vector could
+be treated as a center of a “grid cell”, and can be used as a “discretized”
+representation of vectors in proximity. But in case of K-Means, quantized
+vectors could have much more dimensions and the “cells” are not in 2D, but
+generally in <script type="math/tex">N</script>-dimensional space.</p>
+
+<p>Next section shows how this idea can be used to convert observation vectors of
+arbitrary length into fixed-size feature vectors.</p>
+
+<hr class="with-margin" />
+
+<h4 class="header" id="casestudy">Applying K-Means to Accelerometer Data</h4>
+
+<p>Consider the following use case. You have a dataset with accelerometer
+measurements. Each measurement is saved into separate text file and is
+represented with a sequence of <script type="math/tex">(x, y, z)</script> coordinates. Also, each measurement
+belongs to one of <script type="math/tex">M</script> activity types, like <script type="math/tex">PourWater</script> or <script type="math/tex">Walk</script>. To convert
+this dataset into something suitable for a machine learning algorithm
+(SVM, decision tree, logistic regression or anything else), one need to read
+measurements from files and concatenate their coordinates into feature vectors.</p>
+
+<p>But what if each file contains an <em>arbitrary number of coordinates</em>, i.e.
+its length is not predefined? That is exactly the case of <a href="https://archive.ics.uci.edu/ml/datasets/Dataset+for+ADL+Recognition+with+Wrist-worn+Accelerometer">Wrist-worn Accelerometer Data Set</a>
+mentioned at the beginning of this post, as <strong>Figure 3</strong> shows:</p>
+
+<p><img src="/assets/img/num_of_files_hist.png" alt="Histogram" class="center-image" />
+<em class="figure">Fig 3. Histogram of most common file lengths</em></p>
+
+<p>It is not possible to concatenate measurements together, because then each
+feature vector would have a different length. But K-Means clustering can help to
+overcome this issue and prepare dataset for classification. For this purpose
+each dataset’s file should be parsed into a matrix of accelerometer measurements.
+Then, a clustering algorithm should be applied to that matrix. Finally, the
+all calculated centroids should be concatenated into a single feature vector.
+The process described is schematically shown on <strong>Figure 4</strong>.</p>
+
+<p><img src="/assets/img/kmeans_quantization.png" alt="KMeansToFeature" class="center-image" />
+<em class="figure">Fig 4. Using K-Means to create fixed-size feature vectors</em></p>
+
+<!-- Next section shows how K-Means algorithm implementation shown in previous sections -->
+<!-- could be applied to the accelerometer measurements dataset. -->
+
+<hr class="with-margin" />
+
+<h4 class="header" id="conclusion">Conclusion</h4>
+
+<hr class="with-margin" />
+
+<h3 id="references">References</h3>
+
+<ol>
+  <li><a href="http://stanford.edu/~cpiech/cs221/handouts/kmeans.html">K-Means algorithm pseudocode</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/K-means_clustering">K-Means clustering Wikipedia article</a></li>
+  <li><a href="http://web.science.mq.edu.au/~cassidy/comp449/html/ch10s03.html">Vector Quantization</a></li>
+</ol>
+
+    </article>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "/blog/2018/05/19/kmeans-quantizer";
+        this.page.identifier = "3";
+        this.page.title = "Using K-Means clustering to Quantize Dataset Samples (Part 1)";
+      };
+
+      (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//iliazaitsev-me.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+    <footer class="footer">
+        Ilia Zaitsev, 2017-2018
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous">
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/swift.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="/lib/site.js"></script>
+</body>
+</html>
