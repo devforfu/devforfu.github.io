@@ -53,8 +53,8 @@ implementation of K-Means and apply it to
 
 <blockquote class="tip">
 <strong>TL;DR:</strong> Everyone who doesn't need verbose explanations and
-prefer to read code instead could use the following link to navigate right into
-the repository with vectors quantization implementation.
+prefer to read the code instead could use &lt;a href="https://github.com/devforfu/Blog/tree/master/kmeans"
+the following link&lt;/a&gt; to navigate right into the repository with vectors quantization implementation.
 </blockquote>
 
 <div class="list-of-contents">
@@ -200,21 +200,43 @@ mentioned at the beginning of this post, as <strong>Figure 3</strong> shows:</p>
 
 <p>It is not possible to concatenate measurements together, because then each
 feature vector would have a different length. But K-Means clustering can help to
-overcome this issue and prepare dataset for classification. For this purpose
-each dataset’s file should be parsed into a matrix of accelerometer measurements.
-Then, a clustering algorithm should be applied to that matrix. Finally, the
-all calculated centroids should be concatenated into a single feature vector.
-The process described is schematically shown on <strong>Figure 4</strong>.</p>
+overcome this issue and prepare dataset for classification. The process of
+mapping from arbitrary length accelerometer observations array into
+fixed-size feature vector is schematically shown on <strong>Figure 4</strong>.</p>
 
 <p><img src="/assets/img/kmeans_quantization.png" alt="KMeansToFeature" class="center-image" />
 <em class="figure">Fig 4. Using K-Means to create fixed-size feature vectors</em></p>
 
-<!-- Next section shows how K-Means algorithm implementation shown in previous sections -->
-<!-- could be applied to the accelerometer measurements dataset. -->
+<p>Each of <script type="math/tex">N</script> dataset’s files should be parsed into a matrix of accelerometer
+measurements with shape <script type="math/tex">(M_i, 3)</script> where <script type="math/tex">M_i</script> is <script type="math/tex">i</script>-th file length.
+Then, the clustering algorithm with <script type="math/tex">K</script> clusters should be applied to
+<strong>each of these matrices, separately</strong>. Finally, the centroids calculated for each
+matrix should be concatenated into 1-dimensional feature vectors with length
+<script type="math/tex">K \times 3</script>, and then stacked together into final matrix of
+size <script type="math/tex">(N, K \times 3)</script>.</p>
+
+<p>The following snippet shows how this processes looks in code:</p>
+
+<script src="https://gist.github.com/devforfu/8e302609ae11cc70c1b18bcf88a7cff7.js"></script>
+
+<p>The project with full implementation of the functions described in this post
+could be found via <a href="https://github.com/devforfu/Blog/tree/master/kmeans">this link</a>
+alongside with aforementioned dataset and a couple of helper utilities.</p>
 
 <hr class="with-margin" />
 
 <h4 class="header" id="conclusion">Conclusion</h4>
+
+<p>The K-Means algorithm is a simple, but powerful clustering technique which
+should have its place in any machine learning engineer’s toolkit. It could be
+applied not only in an unsupervised learning setting to discover patterns of
+an analyzed dataset, but also to reduce a dimensionality of the considered
+problem.</p>
+
+<p>Though it is simple to implement this method from scratch, it is
+better to use robust, scalable and well-tested solution instead, like
+<a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">scikit-learn implementation</a>, which takes into account various edge
+cases and improvements.</p>
 
 <hr class="with-margin" />
 
