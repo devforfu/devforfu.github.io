@@ -37,23 +37,22 @@
     <h3 class="header centered">Using K-Means clustering to Quantize Dataset Samples (Part 1)</h3>
     <hr />
     <div class="tags right">
-        <span>tags:</span>&nbsp;python, kmeans, numpy, sklearn
+        <span>tags:</span>&nbsp;python, kmeans, numpy
     </div>
     <article class="text main">
-    <p>Clustering algorithms are used to analyze data in unsupervised fashion, in
-cases when labels are not available or to get new insights about dataset
-distribution. K-Means is one of the oldest clustering algorithms developed
-several decades ago, but still used in Machine Learning tasks. One of the ways
+    <p>Clustering algorithms are used to analyze data in an unsupervised fashion, in
+cases when labels are not available or to get new insights about the dataset.
+The K-Means algorithm is one of the oldest clustering algorithms developed
+several decades ago but still applied in Machine Learning tasks. One of the ways
 to use this algorithm is to apply it for <em>vector quantization</em>, a process which
-maps vectors of arbitrary length. In this post I am going to show simple
-implementation of K-Means and apply it to
-<a href="https://archive.ics.uci.edu/ml/datasets/Dataset+for+ADL+Recognition+with+Wrist-worn+Accelerometer">Wrist-worn Accelerometer Data Set</a></p>
+allows reducing the dimensionality of analyzed data. In this post, I’m going to
+implement a simple implementation of K-Means and apply it to <a href="https://archive.ics.uci.edu/ml/datasets/Dataset+for+ADL+Recognition+with+Wrist-worn+Accelerometer">Wrist-worn Accelerometer Dataset</a>.</p>
 
 <!--more-->
 
 <blockquote class="tip">
 <strong>TL;DR:</strong> Everyone who doesn't need verbose explanations and
-prefer to read the code instead could use <a href="https://github.com/devforfu/Blog/tree/master/kmeans">
+prefers to read the code instead could use <a href="https://github.com/devforfu/Blog/tree/master/kmeans">
 this link</a> to navigate right into the repository with vectors quantization implementation.
 </blockquote>
 
@@ -79,7 +78,7 @@ could be represented using the following pseudocode:</p>
     <li>
       For each of `K` clusters, compute the cluster <em>centroid</em> which is
       the vector of <em>p</em> feature means for the observations in the
-      <strong>k-th</strong> cluster. (In other words, each cluster's centroid is
+      <strong><em>k</em></strong>th cluster. (In other words, each cluster's centroid is
       an average of vectors assigned to the cluster).
     </li>
     <li>
@@ -91,14 +90,14 @@ could be represented using the following pseudocode:</p>
   </ol>
 </blockquote>
 
-<p>Note that the algorithm uses Euclidean metric to measure similarity between
+<p>Note that the algorithm uses the Euclidean metric to measure the similarity between
 data points. It means that each dimension is considered to be <strong>equally important</strong>
 to differentiate one sample from another. Therefore, it is crucial to normalize
 your dataset before running the algorithm.</p>
 
-<p><strong>Figure 1</strong> shows an animated process of K-Means clustering of randomly
+<p><strong>Figure 1</strong> shows an animated process of K-Means clustering of a randomly
 generated dataset, where each cluster is rendered with a different color.
-While the algorithm iterates though its loop, centroids slowly change their
+While the algorithm iterates through its loop, centroids slowly change their
 positions until there is no re-assignments anymore.</p>
 
 <p><img src="/assets/img/clustering.gif" alt="Clustering" class="center-image" />
@@ -111,12 +110,12 @@ which is the total distance from samples to their clusters’s centroids:</p>
 
 <script type="math/tex; mode=display">I = \sum_{j = 1}^{K}{ \sum_{\substack{i = 1 \\ x_i \in C_j}}^{N}{ d(x_i, c_j)} }</script>
 
-<p>Where <script type="math/tex">K</script> is number of clusters, <script type="math/tex">N</script> — number of observations,
-<script type="math/tex">C_j</script> is set of observations belonging to cluster <script type="math/tex">j</script> and <script type="math/tex">c_j</script> is centroid
-of <script type="math/tex">j</script>-th cluster. This measure of clustering quality which shows how close
+<p>Where <script type="math/tex">K</script> is a number of clusters, <script type="math/tex">N</script> — a number of observations,
+<script type="math/tex">C_j</script> is a set of observations belonging to cluster <script type="math/tex">j</script> and <script type="math/tex">c_j</script> is centroid
+of <script type="math/tex">j</script>th cluster. This measure of clustering quality which shows how close
 dataset observations are to the centers of their clusters.</p>
 
-<p>In next section we’re going to implement K-Means clustering using <code class="highlighter-rouge">numpy</code> library.</p>
+<p>In next section, we’re going to implement K-Means clustering using <code class="highlighter-rouge">numpy</code> library.</p>
 
 <hr class="with-margin" />
 
@@ -126,8 +125,8 @@ dataset observations are to the centers of their clusters.</p>
 via <a href="https://github.com/devforfu/Blog/blob/master/kmeans/kmeans.py">this link</a>.
 In this section let’s highlight the main keypoints of the algorithm.</p>
 
-<p>To implement the main loop of K-Means clustering we need a function, that accepts
-a dataset, number of clusters <script type="math/tex">K</script>, and a couple of additional
+<p>To implement the main loop of K-Means clustering we need a function that accepts
+a dataset, a number of clusters <script type="math/tex">K</script>, and a couple of additional
 parameters to specify how many restarts of algorithm do we want to perform to
 find the best clustering assignment:</p>
 
@@ -135,15 +134,15 @@ find the best clustering assignment:</p>
 
 <p>A dataset normalization required only to subtract the mean of dataset values
 from each of samples and divide them by standard deviation. To generate random
-centroids we can use one of random generators from <code class="highlighter-rouge">numpy.random</code> module.
+centroids we can use one of the random generators from <code class="highlighter-rouge">numpy.random</code> module.
 Calculating an inertia metric is also quite simple using <code class="highlighter-rouge">numpy</code> and its
 filtering and linear algebra functions:</p>
 
 <script src="https://gist.github.com/devforfu/37642a7caddc5f38fba331895d6356e7.js"></script>
 
 <p>Before proceeding to quantization algorithm, here is an important remark. Despite
-of the fact that the implementation of K-Means algorithm provided in this post’s
-repository is totally functional and does its job, it is quite far away from
+the fact that the implementation of K-Means algorithm provided in this post’s
+repository is totally functional and does its job, it is quite far away from the
 production-ready code.</p>
 
 <p>Check <a href="https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/cluster/k_means_.py">this link</a>
@@ -161,10 +160,10 @@ VQ is a data reduction method which means that it seeks to reduce the number
 of dimensions in the input data so that the models used to match unknowns can
 be as simple as possible.</p>
 
-<p>Quantization allows to transform continuous values into discrete buckets. <strong>Figure 2</strong>
+<p>Quantization allows transforming continuous values into discrete buckets. <strong>Figure 2</strong>
 shows a 2D plane filled with <strong>blue</strong> dots representing values of random continuous
-real vectors. To discretize this space into finite number of buckets one could
-plot a grid on top of plane with blue dots and replace each blue dot with a <strong>red</strong>
+real vectors. To discretize this space into a finite number of buckets one could
+plot a grid on top of the plane with blue dots and replace each blue dot with a <strong>red</strong>
 one which is the center of a grid cell where the blue dot falls.</p>
 
 <p><img src="/assets/img/dots.png" alt="Quantization" class="center-image" />
@@ -184,11 +183,11 @@ arbitrary length into fixed-size feature vectors.</p>
 <h4 class="header" id="casestudy">Applying K-Means to Accelerometer Data</h4>
 
 <p>Consider the following use case. You have a dataset with accelerometer
-measurements. Each measurement is saved into separate text file and is
-represented with a sequence of <script type="math/tex">(x, y, z)</script> coordinates. Also, each measurement
+measurements. Each measurement is saved into a separate text file and is
+represented by a sequence of <script type="math/tex">(x, y, z)</script> coordinates. Also, each measurement
 belongs to one of <script type="math/tex">M</script> activity types, like <script type="math/tex">PourWater</script> or <script type="math/tex">Walk</script>. To convert
 this dataset into something suitable for a machine learning algorithm
-(SVM, decision tree, logistic regression or anything else), one need to read
+(SVM, decision tree, logistic regression or anything else), one needs to read
 measurements from files and concatenate their coordinates into feature vectors.</p>
 
 <p>But what if each file contains an <em>arbitrary number of coordinates</em>, i.e.
@@ -200,19 +199,19 @@ mentioned at the beginning of this post, as <strong>Figure 3</strong> shows:</p>
 
 <p>It is not possible to concatenate measurements together, because then each
 feature vector would have a different length. But K-Means clustering can help to
-overcome this issue and prepare dataset for classification. The process of
-mapping from arbitrary length accelerometer observations array into
-fixed-size feature vector is schematically shown on <strong>Figure 4</strong>.</p>
+overcome this issue and prepare the dataset for classification. The process of
+mapping from arbitrary length accelerometer observations array into a
+fixed-size feature vector is schematically shown in <strong>Figure 4</strong>.</p>
 
 <p><img src="/assets/img/kmeans_quantization.png" alt="KMeansToFeature" class="center-image" />
 <em class="figure">Fig 4. Using K-Means to create fixed-size feature vectors</em></p>
 
 <p>Each of <script type="math/tex">N</script> dataset’s files should be parsed into a matrix of accelerometer
-measurements with shape <script type="math/tex">(M_i, 3)</script> where <script type="math/tex">M_i</script> is <script type="math/tex">i</script>-th file length.
+measurements with shape <script type="math/tex">(M_i, 3)</script> where <script type="math/tex">M_i</script> is <script type="math/tex">i</script>th file length.
 Then, the clustering algorithm with <script type="math/tex">K</script> clusters should be applied to
 <strong>each of these matrices, separately</strong>. Finally, the centroids calculated for each
 matrix should be concatenated into 1-dimensional feature vectors with length
-<script type="math/tex">K \times 3</script>, and then stacked together into final matrix of
+<script type="math/tex">K \times 3</script>, and then stacked together into the final matrix of
 size <script type="math/tex">(N, K \times 3)</script>.</p>
 
 <p>The following snippet shows how this processes looks in code:</p>
@@ -221,7 +220,7 @@ size <script type="math/tex">(N, K \times 3)</script>.</p>
 
 <p>The project with full implementation of the functions described in this post
 could be found via <a href="https://github.com/devforfu/Blog/tree/master/kmeans">this link</a>
-alongside with aforementioned dataset and a couple of helper utilities.</p>
+alongside with the aforementioned dataset and a couple of helper utilities.</p>
 
 <hr class="with-margin" />
 

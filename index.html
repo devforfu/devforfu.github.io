@@ -45,14 +45,13 @@
                 <h4 class="header">Using K-Means clustering to Quantize Dataset Samples (Part 1)</h4>
                 <hr/>
                 <article class="text main">
-                    <p>Clustering algorithms are used to analyze data in unsupervised fashion, in
-cases when labels are not available or to get new insights about dataset
-distribution. K-Means is one of the oldest clustering algorithms developed
-several decades ago, but still used in Machine Learning tasks. One of the ways
+                    <p>Clustering algorithms are used to analyze data in an unsupervised fashion, in
+cases when labels are not available or to get new insights about the dataset.
+The K-Means algorithm is one of the oldest clustering algorithms developed
+several decades ago but still applied in Machine Learning tasks. One of the ways
 to use this algorithm is to apply it for <em>vector quantization</em>, a process which
-maps vectors of arbitrary length. In this post I am going to show simple
-implementation of K-Means and apply it to
-<a href="https://archive.ics.uci.edu/ml/datasets/Dataset+for+ADL+Recognition+with+Wrist-worn+Accelerometer">Wrist-worn Accelerometer Data Set</a></p>
+allows reducing the dimensionality of analyzed data. In this post, I’m going to
+implement a simple implementation of K-Means and apply it to <a href="https://archive.ics.uci.edu/ml/datasets/Dataset+for+ADL+Recognition+with+Wrist-worn+Accelerometer">Wrist-worn Accelerometer Dataset</a>.</p>
 
 
                 </article>
@@ -76,10 +75,10 @@ implementation of K-Means and apply it to
                 <h4 class="header">Generators-Based Data Processing Pipeline</h4>
                 <hr/>
                 <article class="text main">
-                    <p>Generators represent quite powerful conception of gradually consumed (and probably indefinite)
+                    <p>Generators represent a quite powerful conception of gradually consumed (and probably indefinite)
 streams of data. Almost every <strong>Python 3.x</strong> developer has encountered generators
 (when used <code class="highlighter-rouge">range</code> or <code class="highlighter-rouge">zip</code> methods, for example). However, the generators could
-be used not only as sources of data, but also as <em>coroutines</em> organized into
+be used not only as sources of data but also as <em>coroutines</em> organized into
 data transformation chains. The post shows how to build generators pipeline
 which preprocesses images stored on external storage.</p>
 
