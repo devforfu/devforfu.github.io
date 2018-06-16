@@ -279,3 +279,11 @@ em.figure {
   display: block;
   text-align: center;
 }
+
+ul.list-unstyled.with-padding li {
+  padding-left: 2em;
+}
+
+.top-offset {
+  padding-top: 1em;
+}
