@@ -21,7 +21,12 @@ less prone to data noise.
 <!--more-->
 
 <blockquote class="tip">
-<strong>TL;DR:</strong> Implementation link.
+<strong>TL;DR:</strong> As always, here is
+<a href="https://github.com/devforfu/Blog/tree/master/trees">a link</a> to
+the repository with solutions implementing
+<a href="https://github.com/devforfu/Blog/blob/master/trees/decision_tree.py">Decision Tree</a>
+and <a href="https://github.com/devforfu/Blog/blob/master/trees/ensemble.py">Random Forest</a>
+classifiers, as well as their applying to the accelerometer dataset.
 </blockquote>
 
 <div class="list-of-contents">
@@ -150,10 +155,12 @@ all available attributes of the data? The reason is described in the next sectio
 <h4 class="header" id="ensemble">Ensemble Methods and Random Forests</h4>
 
 Ok, now we have an implemented classifier and can use it to classify various
-dataset. However, let's take a look at what's going on if we try to train a
-tree on various subsets of the original dataset:
+dataset. However, what's going on if we try to train a tree on various subsets
+of the original dataset? **Figure 2** shows decision trees trained on
+three distinct random splits of the dataset.
 
 ![TreeExample](/assets/img/decision_tree/trees.png){: .center-image}
+<em class="figure">Fig 2. Group of decision trees trained using different dataset splits</em>
 
 Despite that the root nodes are almost equal, the trees are a bit different in
 their leaves and inner nodes. It means that you're going to get different
@@ -190,9 +197,70 @@ could be applied to any kind of classifier, not only to the Decision Tree.
 In cases when this approach is applied to a group of trees,
 the strong learner is called **Random Forest**.
 
+The snippet below shows a simple wrapper build on top of our decision tree
+implementation which creates a bunch of decision trees and provides a few
+convenience methods for making predictions:
+
+<script src="https://gist.github.com/devforfu/fa4ecd2b5805018dfe8971cd3d12250b.js"></script>
+
+Lines **28-36** create an array of decision trees. Each one is trained on
+a bootstrapped sample of the original dataset. Lines **46-66** define the method
+called `predict_proba()`, returning a matrix with classes occurrence
+frequencies based on trees predictions. Other methods and utilities serve for
+convenience purposes. The standalone implementation of the classifier and
+helping utilities can be found [here](https://github.com/devforfu/Blog/blob/master/trees/ensemble.py).
+
+Now we're ready to join everything described in this post together and apply
+our DIY classifiers to the Wrist-worn Accelerometer Dataset.
 
 <hr class="with-margin">
 <h4 class="header" id="dataset">Accelerometer Dataset Classification</h4>
 
+As we know from the previous post, the accelerometer dataset is not prepared to
+be directly fed into a classical supervised learning algorithm that expects an
+array with samples $$X$$ and an array with targets $$y$$. Therefore, the first step is
+to apply the dataset quantization algorithm. Then, we need to convert targets
+from strings into numerical values. Next, we split the quantized dataset into
+training and validation subsets. Finally, we're training an instance of
+Random Forest classifier on the training subset and checking its performance
+on validation subset.
+
+The snippet below shows all these steps. An interested reader could also check
+this [Jupyter notebook](https://github.com/devforfu/Blog/blob/master/trees/accelerometer.ipynb)
+that contains the same steps, and could be used as a playground to investigate
+separate steps of our pipeline.
+
+<script src="https://gist.github.com/devforfu/5ead7fa9d04c0bb26d827c5f95ebaaff.js"></script>
+
+A question that one would ask when using an ensemble classifier is how many weak
+learners do we need to use to achieve the best possible performance? One way to
+know is to add classifiers one after another to the ensemble and check the
+ensemble's performance. **Figure 3** shows a plot reflecting dependency between a
+logarithm of the number of trees N in ensemble and validation accuracy measured
+in percents. The $$N$$ value is varied from $$1$$ to $$1000$$. Each orange dot
+reflects an accuracy for a specific N value, and the blue curve is a polynomial
+approximation of these discrete measurements.
+
+![Accuracy](/assets/img/decision_tree/log_acc.png){: .center-image}
+<em class="figure">Fig 3. Relationship between ensemble accuracy and its size</em>
+
+We're getting approximately **47%** accuracy on the validation subset with  **14** classes,
+and we can claim that our classifier successfully grasps relationships between
+samples and targets, performing much better than a random guess.
+
+As the curve shows, we're getting a significant accuracy increase when going
+from a single tree to several dozens of trees. However, the ensemble accuracy
+has the boundary: the accuracy slowly stops increasing when the number of trees
+reaches several hundred. To get better results we could try to randomize
+training process even more or gather extra data.
+
 <hr class="with-margin">
 <h4 class="header" id="outro">Conclusion</h4>
+
+Decision trees and their ensembles are intuitively clear but powerful machine
+learning techniques. There are many improvements to the original algorithm and
+a bunch of great libraries that allow training trees ensembles in parallel
+fashion and getting higher accuracy, like, an excellent library called
+[XGBoost](https://github.com/dmlc/xgboost). Nevertheless, even a naïve
+implementation shows decent results and proofs that it is not too challenging
+to implement a machine learning classifier from scratch.
