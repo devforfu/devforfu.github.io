@@ -211,6 +211,10 @@ hr.with-margin {
     padding-bottom: 1em;
 }
 
+img.button-image {
+    height: 50px;
+}
+
 
 /* ----------------- */
 /* Banners and notes */

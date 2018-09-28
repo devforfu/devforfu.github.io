@@ -4,7 +4,11 @@ category: blog
 ---
 <div class="container">
 {% for post in site.posts %}
+{% if post.foreign_url == null %}
 <div class="card post post-link" href="{{ post.url }}">
+{% else %}
+<div class="card post post-link" href="{{ post.foreign_url }}">
+{% endif %}
     <div class="card-block">
         <div class="row">
             <div class="col-3">
