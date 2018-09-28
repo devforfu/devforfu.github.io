@@ -7,7 +7,7 @@ category: blog
 {% if post.foreign_url == null %}
 <div class="card post post-link" href="{{ post.url }}">
 {% else %}
-<div class="card post post-link" href="{{ post.foreign_url }}">
+<div class="card post post-link" href="{{ post.foreign_url }}" foreign=true>
 {% endif %}
     <div class="card-block">
         <div class="row">

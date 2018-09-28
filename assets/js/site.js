@@ -4,7 +4,12 @@ function setup() {
         post.addEventListener('click', (e) => {
             let location = window.location;
             let postUrl = post.getAttribute('href');
-            let newLocation = `http://${location['host']}${postUrl}`;
+            let newLocation = "";
+            if (post.hasAttribute('foreign') && post.getAttribute('foreign')) {
+                newLocation= postUrl;
+            } else {
+                newLocation = `http://${location['host']}${postUrl}`;
+            }
             window.location = newLocation;
         });
     });
