@@ -10,14 +10,14 @@
           href="https://fonts.googleapis.com/css?family=Coda:400,800|Roboto:400,500,700|Share:400,400i,700,700i|Space+Mono:400,400i,700,700i">
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/hybrid.min.css">
-    <link rel="stylesheet" href="https://iliazaitsev.me/assets/css/site.css">
-    <link rel="stylesheet" href="https://iliazaitsev.me/assets/css/gist.css">
-    <link rel="stylesheet" href="https://iliazaitsev.me/assets/css/hsjs.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/gist.css">
+    <link rel="stylesheet" href="/assets/css/hsjs.css">
 </head>
 <body onload="setup();">
     <div class="topmost">
         <div class="image">
-            <img src="https://iliazaitsev.me/assets/img/writings.png" width="1250">
+            <img src="/assets/img/writings.png" width="1250">
         </div>
         <div class="text">
             <div class="title">Ilia Zaitsev</div>
@@ -37,14 +37,18 @@
     <h3 class="header centered">Dogs Breeds Classification with Keras</h3>
     <hr />
     <div class="tags right">
-        <span>tags:</span>&nbsp;python, ensemble, trees, numpy
+        <span>tags:</span>&nbsp;python, keras, classification, jupyter
     </div>
     <article class="text main">
     <p>Modern deep learning architectures show quite good results in various fields of
 artificial intelligence. One of them is images classification. In this post,
 I am going to see if one could achieve an accurate classification of images by
-applying out-of-the-box ImageNet pre-trained deep models from Keras Python
-package.</p>
+applying out-of-the-box <a href="http://image-net.org/">ImageNet</a> pre-trained deep
+models from <a href="http://keras.io/">Keras</a> Python package.</p>
+
+<p><em>The post was originally published on Medium. Then an updated and improved version
+was <a href="https://able.bio/devforfu/identifying-dog-breeds-using-keras--767qpxs">ported</a>
+to Able.bio platform.</em></p>
 
 <!--more-->
 
@@ -52,7 +56,7 @@ package.</p>
     <div id="disqus_thread"></div>
     <script>
       var disqus_config = function () {
-        this.page.url = "https://iliazaitsev.me/blog/2018/04/09/dogs-breeds-identification";
+        this.page.url = "/blog/2018/04/09/dogs-breeds-identification.html";
         this.page.identifier = "";
         this.page.title = "Dogs Breeds Classification with Keras";
       };
@@ -88,6 +92,6 @@ package.</p>
     <script>
         hljs.initHighlightingOnLoad();
     </script>
-    <script src="https://iliazaitsev.me/lib/site.js"></script>
+    <script src="/lib/site.js"></script>
 </body>
 </html>

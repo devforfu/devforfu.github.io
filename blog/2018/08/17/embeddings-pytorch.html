@@ -33,42 +33,47 @@
             <li class="contact"><a href="/contact">Contact</a></li>
         </ul>
     </div>
-    <div class="container">
-    <div class="row">
-        <div class="col-12 d-table">
-            <div class="d-table-cell align-middle">
-                <p class="text-center huge">Want to know more?</p>
-                <p class="text-center huge">Please visit on of the links below!</p>
-                <ul class="list-inline text-center">
-                    
-                    <li class="list-inline-item">
-                        <a href="https://medium.com/@iliazaitsev" class="d-flex justify-content-center">
-                            <img src="/assets/img/links/medium.png" class="button-image">
-                        </a>
-                    </li>
-                    
-                    <li class="list-inline-item">
-                        <a href="https://github.com/devforfu" class="d-flex justify-content-center">
-                            <img src="/assets/img/links/github.png" class="button-image">
-                        </a>
-                    </li>
-                    
-                    <li class="list-inline-item">
-                        <a href="https://stackoverflow.com/users/6619344/devforfu" class="d-flex justify-content-center">
-                            <img src="/assets/img/links/so.png" class="button-image">
-                        </a>
-                    </li>
-                    
-                    <li class="list-inline-item">
-                        <a href="https://www.upwork.com/freelancers/~01d11961a8111e5d25" class="d-flex justify-content-center">
-                            <img src="/assets/img/links/upwork.png" class="button-image">
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
+    <div class="container post">
+    <h3 class="header centered">Building Simple Recommendation System with PyTorch</h3>
+    <hr />
+    <div class="tags right">
+        <span>tags:</span>&nbsp;python, ensemble, trees, numpy
     </div>
+    <article class="text main">
+    <p>Recently I’ve started watching <a href="http://course.fast.ai">fast.ai</a> lectures—
+a great online course on Deep Learning. In one of his lectures, the author
+discusses the building of a simple neural network based recommendation system
+with application to the MovieLens dataset. The lecture relies on
+the library developed by the author to run the training process. However,
+I strongly wanted to learn more about the <strong>PyTorch</strong> framework which sits
+under the hood of authors code. In this post, I am describing the process of implementing and training a simple embeddings-based collaborative filtering recommendation system using <strong>PyTorch</strong>, <strong>Pandas</strong>,
+and <strong>Scikit-Learn</strong>.</p>
+
+<!--more-->
+
+<p>In this post, I’m recreating author’s approach
+using this framework only.</p>
+
+<p>Recently I’ve started watching fast.ai lectures — a great online course on Deep Learning and its applications. In one of his lectures, the author discusses the building of a simple neural network based recommendation system with application to the MovieLens dataset. While the lecture is an excellent source of information on this topic, it mostly relies on the library developed by the authors to run the training process. The library is quite flexible and provides several levels of abstractions.
+However, I strongly wanted to learn more about the PyTorch framework which sits under the hood of authors code. In this post, I am describing the process of implementing and training a simple embeddings-based collaborative filtering recommendation system using PyTorch, Pandas, and Scikit-Learn. We’re going to follow the steps described in the lecture without using the mentioned library.</p>
+
+    </article>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "/blog/2018/08/17/embeddings-pytorch.html";
+        this.page.identifier = "";
+        this.page.title = "Building Simple Recommendation System with PyTorch";
+      };
+
+      (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//iliazaitsev-me.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 
     <footer class="footer">
