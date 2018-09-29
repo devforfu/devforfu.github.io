@@ -215,6 +215,14 @@ img.button-image {
     height: 50px;
 }
 
+.brightness {
+    background-color: white;
+    display: inline-block;
+
+}
+.brightness img:hover {
+    opacity: .6;
+}
 
 /* ----------------- */
 /* Banners and notes */
