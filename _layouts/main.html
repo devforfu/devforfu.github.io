@@ -24,6 +24,11 @@ category: blog
         </div>
     </div>
     <div class="card-footer text-muted">
+        {% if post.foreign_logo != null %}
+        <img src="assets/img/logo/{{ post.foreign_logo }}"
+             style="display: inline; float: left;"
+             height="30">
+        {% endif %}
         <div class="timestamp">
             Publication Date: {{ post.date | date_to_long_string }}
         </div>
