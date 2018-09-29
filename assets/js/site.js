@@ -2,14 +2,15 @@ function setup() {
     const posts = Array.from(document.getElementsByClassName('post-link'));
     posts.forEach(post => {
         post.addEventListener('click', (e) => {
+            let location = window.location;
             let postUrl = post.getAttribute('href');
+            let newLocation = "";
             if (post.hasAttribute('foreign') && post.getAttribute('foreign')) {
-                window.location = postUrl;
+                newLocation= postUrl;
             } else {
-                let oldLocation = window.location;
-                let newLocation = `http://${oldLocation['host']}${postUrl}`;
-                window.location = newLocation;
+                newLocation = `http://${location['host']}${postUrl}`;
             }
+            window.location = newLocation;
         });
     });
 
