@@ -8,8 +8,8 @@ foreign_url: https://medium.com/coinmonks/how-to-implement-a-recommendation-syst
 foreign_logo: "medium.png"
 ---
 
-Recently I’ve started watching [fast.ai](http://course.fast.ai) lectures&mdash;
-a great online course on Deep Learning. In one of his lectures, the author
+Recently I’ve started watching [fast.ai](http://course.fast.ai) lectures&mdash; a great
+ online course on Deep Learning. In one of his lectures, the author
 discusses the building of a simple neural network based recommendation system
 with application to the MovieLens dataset. The lecture relies on
 the library developed by the author to run the training process. However,
