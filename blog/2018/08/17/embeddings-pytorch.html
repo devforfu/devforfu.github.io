@@ -10,14 +10,14 @@
           href="https://fonts.googleapis.com/css?family=Coda:400,800|Roboto:400,500,700|Share:400,400i,700,700i|Space+Mono:400,400i,700,700i">
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/hybrid.min.css">
-    <link rel="stylesheet" href="/assets/css/site.css">
-    <link rel="stylesheet" href="/assets/css/gist.css">
-    <link rel="stylesheet" href="/assets/css/hsjs.css">
+    <link rel="stylesheet" href="https://iliazaitsev.me/assets/css/site.css">
+    <link rel="stylesheet" href="https://iliazaitsev.me/assets/css/gist.css">
+    <link rel="stylesheet" href="https://iliazaitsev.me/assets/css/hsjs.css">
 </head>
 <body onload="setup();">
     <div class="topmost">
         <div class="image">
-            <img src="/assets/img/writings.png" width="1250">
+            <img src="https://iliazaitsev.me/assets/img/writings.png" width="1250">
         </div>
         <div class="text">
             <div class="title">Ilia Zaitsev</div>
@@ -40,8 +40,8 @@
         <span>tags:</span>&nbsp;python, ensemble, trees, numpy
     </div>
     <article class="text main">
-    <p>Recently I’ve started watching <a href="http://course.fast.ai">fast.ai</a> lectures— a great
- online course on Deep Learning. In one of his lectures, the author
+    <p>Recently I’ve started watching <a href="http://course.fast.ai">fast.ai</a> lectures—a great
+online course on Deep Learning. In one of his lectures, the author
 discusses the building of a simple neural network based recommendation system
 with application to the MovieLens dataset. The lecture relies on
 the library developed by the author to run the training process. However,
@@ -51,17 +51,11 @@ and <strong>Scikit-Learn</strong>.</p>
 
 <!--more-->
 
-<p>In this post, I’m recreating author’s approach
-using this framework only.</p>
-
-<p>Recently I’ve started watching fast.ai lectures — a great online course on Deep Learning and its applications. In one of his lectures, the author discusses the building of a simple neural network based recommendation system with application to the MovieLens dataset. While the lecture is an excellent source of information on this topic, it mostly relies on the library developed by the authors to run the training process. The library is quite flexible and provides several levels of abstractions.
-However, I strongly wanted to learn more about the PyTorch framework which sits under the hood of authors code. In this post, I am describing the process of implementing and training a simple embeddings-based collaborative filtering recommendation system using PyTorch, Pandas, and Scikit-Learn. We’re going to follow the steps described in the lecture without using the mentioned library.</p>
-
     </article>
     <div id="disqus_thread"></div>
     <script>
       var disqus_config = function () {
-        this.page.url = "/blog/2018/08/17/embeddings-pytorch.html";
+        this.page.url = "https://iliazaitsev.me/blog/2018/08/17/embeddings-pytorch.html";
         this.page.identifier = "";
         this.page.title = "Building Simple Recommendation System with PyTorch";
       };
@@ -97,6 +91,6 @@ However, I strongly wanted to learn more about the PyTorch framework which sits 
     <script>
         hljs.initHighlightingOnLoad();
     </script>
-    <script src="/lib/site.js"></script>
+    <script src="https://iliazaitsev.me/lib/site.js"></script>
 </body>
 </html>
