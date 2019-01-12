@@ -34,21 +34,19 @@
         </ul>
     </div>
     <div class="container post">
-    <h3 class="header centered">Dogs Breeds Classification with Keras</h3>
+    <h3 class="header centered">Deep Learning Model Training Loop</h3>
     <hr />
     <div class="tags right">
-        <span>tags:</span>&nbsp;python, keras, classification, jupyter
+        <span>tags:</span>&nbsp;python, pytorch, mnist, deep learning, design patterns
     </div>
     <article class="text main">
-    <p>Modern deep learning architectures show quite good results in various fields of
-artificial intelligence. One of them is images classification. In this post,
-I am going to see if one could achieve an accurate classification of images by
-applying out-of-the-box <a href="http://image-net.org/">ImageNet</a> pre-trained deep
-models from <a href="http://keras.io/">Keras</a> Python package.</p>
-
-<p><em>The post was originally published on Medium. Then an updated and improved version
-was <a href="https://able.bio/devforfu/identifying-dog-breeds-using-keras--767qpxs">ported</a>
-to Able.bio platform.</em></p>
+    <p>The <strong>PyTorch</strong> is a fantastic and easy to use Deep Learning framework. It provides you
+with all the fundamental tools to build a machine learning model. It gives you CUDA-driven
+tensor computations, optimizers, neural network layers, and so on. However, to train a model
+one needs to assemble all these things into a data processing pipeline. Recently the developers
+released the <code class="highlighter-rouge">1.0</code> version of the framework, and I’ve decided it is a good time to try myself
+in writing generic training loop implementation. In this post, I’m describing this process
+and giving some interesting observations about its development.</p>
 
 <!--more-->
 
@@ -56,9 +54,9 @@ to Able.bio platform.</em></p>
     <div id="disqus_thread"></div>
     <script>
       var disqus_config = function () {
-        this.page.url = "/blog/2018/04/09/dogs-breeds-identification.html";
+        this.page.url = "/blog/2018/12/09/pytorch-training-loop.html";
         this.page.identifier = "";
-        this.page.title = "Dogs Breeds Classification with Keras";
+        this.page.title = "Deep Learning Model Training Loop";
       };
 
       (function() { // DON'T EDIT BELOW THIS LINE
