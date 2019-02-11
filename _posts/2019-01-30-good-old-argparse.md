@@ -12,6 +12,11 @@ The Python programming language is quite often used to write various CLI-based u
 
 <!--more-->
 
+<blockquote class="tip">
+<strong>TL;DR:</strong> Please refer to <a href="https://gist.github.com/devforfu/f7a01e74acfffb63d2957d6231f08285">this gist</a> to find the final version of
+program we're going to develop.
+</blockquote>
+
 <div class="list-of-contents">
   <h4>Post contents</h4>
   <ul></ul>
@@ -81,9 +86,77 @@ There are a couple of interesting keyword arguments we use. The first of them is
 Probably we've written not the best scatter plots rendering programs ever, but it does what we need. Can we do something better here?
 
 <hr class="with-margin">
+<h4 class="header" id="types">Checking Types</h4>
+
+As you could spot at line **41**, we convert raw string argument into a list of real-valued points. Also, line **42** converts canvas size from a string into a tuple. These fragments of code don't have too much relation to our rendering logic. We have only too of them, but more sophisticated programs could include more, and having these additional post-processing lines of code not very convenient.
+
+The `argparse` addresses this issue with a specific keyword parameter called `type` that accepts an arbitrary callable responsible for converting raw strings into concrete types. We can pass built-in type constructors here, like `int` or `float`, or our custom parsing functions. Let's do the later and convert points and canvas size into appropriate types. The snippet below shows an example of how to do so.
+
+<script src="https://gist.github.com/devforfu/bbdb24d107cd818e33e2477657ed6e38.js"></script>
+
+The critical difference from the previous snippet is lines **9** and **15**, as well as custom type functions defined at lines **54** and **69**. The functions take the single argument&mdash;string-typed parameter parsed from the command line. Then we verify that the parameter has a valid format, and convert it into an appropriate type. The `ArgumentTypeError` exception is raised when something goes wrong, and the parser reports about the issue.
+
+```Bash
+$ python typecheck.py -p 1 2 3 4 5 6
+usage: typecheck.py [-h] -p PTS [-sz SZ] [-f FMT] [-o OUT] [--hide-axes]
+                    [--show-grid]
+typecheck.py: error: argument -p/--points: should have format: 1,2;2,3;3,4
+$ python typecheck.py -p "1,2;3,4;5,6" --size 22
+usage: typecheck.py [-h] -p PTS [-sz SZ] [-f FMT] [-o OUT] [--hide-axes]
+                    [--show-grid]
+typecheck.py: error: argument -sz/--size: should have format: 3x4
+```
+
+Great, now we have a parser that is aware of our domain-specific types and shows an informative message when something goes wrong.
+
+<hr class="with-margin">
+<h4 class="header" id="subcommands">Subcommands</h4>
+
+Now our plotter can only read the input from the terminal. It would be great to add support of additional input sources, for example&mdash;JSON files. We can define all rendering parameters within a single file instead of passing them as CLI parameters. The only parameter we need here is a path to the JSON file. However, in our current implementation, the `points` parameter is required, as soon as the renderer which reads its parameters from the terminal cannot do its work without at least point. We don't need this parameter in case of JSON. How can we make so that the parser can handle both these cases smoothly without any hacking with parameters? The answer is subcommands.
+
+The `argparse` allows you to build not only a single god-object like parser that includes every possible parameter but define _a hierarchy of parsers_ instead where each parser is only responsible for the set of arguments for relevant its command. The code says more than thousands of words. The below snippet shows how we can implement such a hierarchical parser.
+
+<script src="https://gist.github.com/devforfu/1760a3e9c94c45ad04d9a94e9eece2a0.js"></script>
+
+We've reordered our code a bit, but the major difference is lines **45**, **52**, and **81**.
+The line **45** shows how to create a subgroup of commands attached to the main parser. (The parameters defined in lines **33-43** become common for all the subcommands we're going to define). The lines **52** and **81** add sub-parsers for each input source, namely, standard input and a JSON file. It is also worth to note lines **53** and **83**. They allow us to distinguish one subcommand from another. We use this default parameter in lines **11-14** to pick an appropriate set of parameters from the parser.
+
+<hr class="with-margin">
+<h4 class="header" id="help">Customized Help Message</h4>
+
+We've explored most of the helpful tricks that we can use to build a flexible and convenient CLI. The only thing we probably would cover is the help message formatting. First of all, by default, the package uses a specific formatting style. For example, it ignores newline characters in the strings we put under `help` keywords in `add_argument`  method calls. Another thing is `-h/--help`  parameter that is added automatically when the parser object is created. If you have a parameter that starts with H letter, like `-h/--host`, you can't use a shortcut version of it because it is already taken by help command. Finally, when a user makes a mistake and passes the wrong parameters or keywords, we could show a full program usage message with some examples instead of telling about a mistake in that specific parameter only. (Which is the behavior of `argparse` by default). The snippet below shows the changes we need to introduce into our program to address all these issues.
+```Python
+# create custom parser
+parser = CustomParser(
+    description=__doc__,
+    formatter_class=argparse.RawTextHelpFormatter,
+    add_help=False
+)
+
+...
+
+# somewhere in the code
+class CustomParser(ArgumentParser):
+
+    def error(self, message):
+        self.print_help()
+        sys.exit(1)
+```
+
+You can find the final version of the program we've written with all the changes
+by following [this link](https://gist.github.com/devforfu/f7a01e74acfffb63d2957d6231f08285).
+
+<hr class="with-margin">
+<h4 class="header" id="theend">Conclusion</h4>
+
+There are plenty of command-line parsing packages written for the Python language. Some of them are intended to wrap your classes and functions with CLI quickly. Others are more involved and give you a sophisticated solution. Nevertheless, the standard `argparse` module is still very helpful and the most portable solution. As soon as you've learned its capabilities and tricks, it becomes a universal and straightforward tool to write CLI scripts with various levels of complexity.
+
+
+<hr class="with-margin">
 ### References
 
 <ol>
-  <li><a href=""></a></li>
-  <li><a href=""></a></li>
+  <li><a href="https://docs.python.org/3/library/argparse.html">The official argparse documentation</a></li>
+  <li><a href="https://github.com/Kaggle/kaggle-api/blob/master/kaggle/cli.py">Kaggle official CLI</a></li>
+  <li><a href="https://github.com/tensorflow/models/blob/d32d957a02f5cffb745a4da0d78f8432e2c52fd4/research/tensorrt/tensorrt.py#L496">An example from the Tensorflow repository</a></li>
 </ol>
