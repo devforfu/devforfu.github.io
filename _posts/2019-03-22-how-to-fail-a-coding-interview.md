@@ -1,7 +1,7 @@
 ---
 layout: 'post'
 category: 'blog'
-title: "The Best Format to Save Pandas Data Frame"
+title: "How to Fail a Coding Interview"
 tags: ['software development', 'coding skills']
 image: "fail.png"
 foreign_url: https://hackernoon.com/how-to-fail-a-coding-interview-8d02cb70225f

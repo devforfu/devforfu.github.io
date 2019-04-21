@@ -2,7 +2,7 @@
 layout: post
 category: blog
 permalink: /:categories/:year/:month/:day/:title
-title: "How to build a flexible CLI with standard Python library"
+title: "How to Build a Flexible CLI with Standard Python Library"
 tags: ['python', 'argparse', 'cli']
 image: "cli.png"
 identifier: 5

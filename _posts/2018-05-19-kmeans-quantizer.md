@@ -2,7 +2,7 @@
 layout: post
 category: blog
 permalink: /:categories/:year/:month/:day/:title
-title: "Using K-Means clustering to Quantize Dataset Samples (Part 1)"
+title: "Using K-Means Clustering to Quantize Dataset Samples (Part 1)"
 tags: ['python', 'kmeans', 'numpy']
 image: "kmeans.png"
 identifier: 3
